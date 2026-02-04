@@ -27,7 +27,11 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api/auth/**"
+                        ).permitAll()
                         .requestMatchers("/api/recruiter/jobs/**").hasRole("RECRUITER")
                         .requestMatchers("/api/jobseeker/**").hasRole("JOBSEEKER")
                         .anyRequest().authenticated()
