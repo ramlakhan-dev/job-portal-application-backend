@@ -1,9 +1,11 @@
 package com.rl.jobportalapp.controller;
 
 import com.rl.jobportalapp.dto.LoginRequest;
+import com.rl.jobportalapp.dto.RefreshTokenRequest;
 import com.rl.jobportalapp.dto.SignupRequest;
 import com.rl.jobportalapp.enums.Role;
 import com.rl.jobportalapp.service.AuthService;
+import com.rl.jobportalapp.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup/jobseeker")
     public ResponseEntity<?> signupJobseeker(
@@ -38,5 +43,12 @@ public class AuthController {
             @RequestBody LoginRequest loginRequest
     ) {
         return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(
+            @RequestBody RefreshTokenRequest refreshTokenRequest
+    ) {
+        return new ResponseEntity<>(refreshTokenService.refresh(refreshTokenRequest), HttpStatus.OK);
     }
 }
