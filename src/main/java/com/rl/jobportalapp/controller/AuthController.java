@@ -1,5 +1,6 @@
 package com.rl.jobportalapp.controller;
 
+import com.rl.jobportalapp.dto.LoginRequest;
 import com.rl.jobportalapp.dto.SignupRequest;
 import com.rl.jobportalapp.enums.Role;
 import com.rl.jobportalapp.service.AuthService;
@@ -30,5 +31,12 @@ public class AuthController {
             @RequestBody SignupRequest signupRequest
     ) {
         return new ResponseEntity<>(authService.signup(signupRequest, Role.RECRUITER), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(
+            @RequestBody LoginRequest loginRequest
+    ) {
+        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 }
