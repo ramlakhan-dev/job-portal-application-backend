@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/recruiter/jobs/**").hasRole("RECRUITER")
+                        .requestMatchers("/api/jobseeker/**").hasRole("JOBSEEKER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
